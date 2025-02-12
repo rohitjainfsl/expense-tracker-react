@@ -23,24 +23,28 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    //create expense
-    const expense = {
-      id: Date.now(),
-      sno: sno.current,
-      detail: form.detail,
-      amount: form.amount,
-    };
-    setExpenses([...expenses, expense]);
+    if (form.amount > budget.remaining || form.amount > budget.total) {
+      alert("Jitni chaadar ho utne hi par failaane chahiye");
+    } else {
+      //create expense
+      const expense = {
+        id: Date.now(),
+        sno: sno.current,
+        detail: form.detail,
+        amount: form.amount,
+      };
+      setExpenses([...expenses, expense]);
 
-    //adjust budget
-    setBudget({
-      ...budget,
-      spent: Number(budget.spent) + Number(form.amount),
-      remaining: budget.remaining - form.amount,
-    });
+      //adjust budget
+      setBudget({
+        ...budget,
+        spent: Number(budget.spent) + Number(form.amount),
+        remaining: budget.remaining - form.amount,
+      });
 
-    //increment serial number
-    sno.current += 1;
+      //increment serial number
+      sno.current += 1;
+    }
 
     //reset the form
     setForm({
@@ -51,6 +55,7 @@ function App() {
 
   return (
     <>
+      <h2 className="title">EXPENSE TRACKER</h2>
       <div className={`budgetDiv ${stage > 0 ? `unUseAble` : `useAble`}`}>
         <input
           type="text"
@@ -96,7 +101,7 @@ function App() {
             type="text"
             placeholder="Expense Amount"
             value={form.amount}
-            onChange={(e) => setForm({ ...form, amount: e.target.value })}
+            onChange={(e) => setForm({ ...form, amount: Number(e.target.value) })}
           />
           <button type="submit">Add Expense</button>
         </form>

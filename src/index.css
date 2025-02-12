@@ -52,6 +52,18 @@ button:focus-visible {
 }
 
 /* EXPENSE TRACKER */
+#root{
+  width: 60vw;
+  margin: 2rem auto;
+}
+.title{
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-shadow: 0 0 3px rgba(255,255,255,0.4);
+}
 .useAble {
   opacity: 1;
   pointer-events: all;
